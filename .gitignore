@@ -97,6 +97,7 @@ xcuserdata/
 
 # Art
 # Art/
+Art/*
 Art.zip
 PBR.zip
 # Examples_3/Unit_Tests/Textures/PBR/
