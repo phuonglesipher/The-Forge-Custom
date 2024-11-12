@@ -5390,7 +5390,7 @@ void cmdBindDescriptorSet(Cmd* pCmd, uint32_t index, DescriptorSet* pDescriptorS
     ASSERT(pDescriptorSet);
     ASSERT(index < pDescriptorSet->mDx.mMaxSets);
 
-    const DescriptorUpdateFrequency updateFreq = (DescriptorUpdateFrequency)pDescriptorSet->mDx.mUpdateFrequency;
+    //const DescriptorUpdateFrequency updateFreq = (DescriptorUpdateFrequency)pDescriptorSet->mDx.mUpdateFrequency;
 
     // Set root signature if the current one differs from pRootSignature
     ResetRootSignature(pCmd, (PipelineType)pDescriptorSet->mDx.mPipelineType, pDescriptorSet->mDx.pRootSignature);
