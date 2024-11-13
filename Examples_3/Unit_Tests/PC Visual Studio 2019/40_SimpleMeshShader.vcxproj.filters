@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\..\Art\Scripts\TestBorderless.lua" />
+    <None Include="..\..\..\Art\Scripts\TestCenteredWindow.lua" />
+    <None Include="..\..\..\Art\Scripts\TestFullScreen.lua" />
+    <None Include="..\..\..\Art\Scripts\TestNonCenteredWindow.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{f6f20e41-f813-4edf-b752-a001d681a125}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FSLShader Include="..\src\40_SimpleMeshShader\Shaders\FSL\skybox.vert.fsl">
+      <Filter>Shaders</Filter>
+    </FSLShader>
+    <FSLShader Include="..\src\40_SimpleMeshShader\Shaders\FSL\basic.vert.fsl">
+      <Filter>Shaders</Filter>
+    </FSLShader>
+    <FSLShader Include="..\src\40_SimpleMeshShader\Shaders\FSL\resources.h.fsl">
+      <Filter>Shaders</Filter>
+    </FSLShader>
+    <FSLShader Include="..\src\40_SimpleMeshShader\Shaders\FSL\ShaderList.fsl">
+      <Filter>Shaders</Filter>
+    </FSLShader>
+    <FSLShader Include="..\src\40_SimpleMeshShader\Shaders\FSL\skybox.frag.fsl">
+      <Filter>Shaders</Filter>
+    </FSLShader>
+    <FSLShader Include="..\src\40_SimpleMeshShader\Shaders\FSL\basic.frag.fsl">
+      <Filter>Shaders</Filter>
+    </FSLShader>
+  </ItemGroup>
+</Project>
