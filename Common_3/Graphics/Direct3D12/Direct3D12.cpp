@@ -6430,6 +6430,37 @@ void cmdDispatch(Cmd* pCmd, uint32_t groupCountX, uint32_t groupCountY, uint32_t
 #endif
 }
 
+void cmdDispatchMesh(Cmd* pCmd, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ)
+{
+    ASSERT(pCmd);
+
+    // dispatch given command
+    ASSERT(pCmd->mDx.pCmdList != NULL);
+
+#if defined(_WINDOWS) && defined(D3D12_RAYTRACING_AVAILABLE) && defined(ENABLE_GRAPHICS_VALIDATION)
+    // Bug in validation when using acceleration structure in compute or graphics pipeline
+    // D3D12 ERROR: ID3D12CommandList::Dispatch: Static Descriptor SRV resource dimensions (UNKNOWN (11)) differs from that expected by
+    // shader (D3D12_SRV_DIMENSION_BUFFER) UNKNOWN (11) is D3D12_SRV_DIMENSION_RAYTRACING_ACCELERATION_STRUCTURE
+    if (pCmd->pRenderer->mDx.pDebugValidation && pCmd->mDx.pBoundRootSignature->mDx.mHasRayQueryAccelerationStructure)
+    {
+        D3D12_MESSAGE_ID        hide[] = { D3D12_MESSAGE_ID_COMMAND_LIST_STATIC_DESCRIPTOR_RESOURCE_DIMENSION_MISMATCH };
+        D3D12_INFO_QUEUE_FILTER filter = {};
+        filter.DenyList.NumIDs = 1;
+        filter.DenyList.pIDList = hide;
+        pCmd->pRenderer->mDx.pDebugValidation->PushStorageFilter(&filter);
+    }
+#endif
+
+    hook_dispatch(pCmd, groupCountX, groupCountY, groupCountZ);
+
+#if defined(_WINDOWS) && defined(D3D12_RAYTRACING_AVAILABLE) && defined(ENABLE_GRAPHICS_VALIDATION)
+    if (pCmd->pRenderer->mDx.pDebugValidation && pCmd->mDx.pBoundRootSignature->mDx.mHasRayQueryAccelerationStructure)
+    {
+        pCmd->pRenderer->mDx.pDebugValidation->PopStorageFilter();
+    }
+#endif
+}
+
 void cmdResourceBarrier(Cmd* pCmd, uint32_t numBufferBarriers, BufferBarrier* pBufferBarriers, uint32_t numTextureBarriers,
                         TextureBarrier* pTextureBarriers, uint32_t numRtBarriers, RenderTargetBarrier* pRtBarriers)
 {
